@@ -36,11 +36,10 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
 
     return Column(
       children: [
-        Text("Lit Lights", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
         Row(
           children: const [
             Text("id", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-            Spacer(),
+            SizedBox(width: 16.0),
             Text("Name", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
             Spacer(),
             Text("State", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
