@@ -1,7 +1,7 @@
 {
   "1": {
     "state": {
-      "on": false,
+      "on": true,
       "bri": 254,
       "hue": 12518,
       "sat": 226,
@@ -68,7 +68,7 @@
   },
   "2": {
     "state": {
-      "on": false,
+      "on": true,
       "bri": 45,
       "hue": 1790,
       "sat": 252,
@@ -135,7 +135,7 @@
   },
   "3": {
     "state": {
-      "on": false,
+      "on": true,
       "bri": 151,
       "hue": 33,
       "sat": 252,
