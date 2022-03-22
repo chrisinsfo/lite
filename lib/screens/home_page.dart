@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lit/screens/lights_state_widget.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -18,10 +19,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: appBar,
       body:  SingleChildScrollView(
-          child: Column(
-            children: [
-              // TODO: lights
-            ],
+          child: Container(
+            child:
+              LightsStateWidget()
           ),
         ),
     );
