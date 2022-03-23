@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:lit/models/light_model.dart';
 import 'package:lit/providers/config_provider.dart';
+import 'package:lit/screens/configuration_screen.dart';
 import 'package:lit/screens/light_switch_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:lit/blocs/lights_bloc.dart';
@@ -20,10 +21,18 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
     final lights = Provider.of<LightsBloc>(context, listen: true);
     final config = Provider.of<ConfigProvider>(context, listen: true);
     if (config.isValidConfig()) {
-      print('lightStream called');
       lights.getLightStream(context);
     } else {
-      return Text('Please update configuration');
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Please update configuration', style: TextStyle(fontSize: 20.0)),
+            ElevatedButton(
+                child: Text('OK'), onPressed: () => Navigator.pushNamed(context, ConfigurationScreen.routeName)),
+          ],
+        ),
+      );
     }
 
     return Column(
