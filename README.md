@@ -4,5 +4,5 @@ Light Control Flutter App
 
 ## Getting Started
 
-This project is an experiment with displaying data from the MeetHue api in a basic Flutter app. 
+This project is an experiment to create a simple light control from the MeetHue api in a basic Flutter app. 
 
