@@ -20,11 +20,15 @@ class _HomePageState extends State<HomePage> {
             onPressed: () =>
                 Navigator.pushNamed(context, ConfigurationScreen.routeName)),
       ],
-      title: Text('Lit'),
+      backgroundColor: Colors.black87,
+      title: Align(
+          alignment: Alignment.topLeft,
+          child: Text('Lit', textAlign: TextAlign.left, style: TextStyle(fontSize:40.0))),
     );
 
     return Scaffold(
       appBar: appBar,
+      backgroundColor: Colors.black87,
       body: SingleChildScrollView(
         child: Container(child: LightsStateWidget()),
       ),

@@ -27,6 +27,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Configuration'),
+        backgroundColor: Colors.black87,
       ),
       body: Column(
         children: [

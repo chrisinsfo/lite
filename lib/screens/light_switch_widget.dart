@@ -44,14 +44,12 @@ class _LightSwitchWidgetState extends State<LightSwitchWidget> {
                   value: onState,
                   onChanged: (bool newValue) {
                     setState(() {
-                      // call toggle (async)
-                      // toggle switch local state
+                      // toggle local switch state
                       onState = !widget.lightModel.state.on;
                       toggle(widget.lightModel.state.on);
                     });
                   },
-                  trackColor:
-                      MaterialStateProperty.all(ColorPaletteUtility.green))
+                  trackColor: MaterialStateProperty.all(ColorPaletteUtility.green))
               : Switch(
                   value: onState,
                   onChanged: (bool newValue) {
@@ -60,8 +58,7 @@ class _LightSwitchWidgetState extends State<LightSwitchWidget> {
                       toggle(widget.lightModel.state.on);
                     });
                   },
-                  trackColor:
-                      MaterialStateProperty.all(ColorPaletteUtility.orange))
+                  trackColor: MaterialStateProperty.all(ColorPaletteUtility.orange))
         ],
       ),
     );

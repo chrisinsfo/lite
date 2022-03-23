@@ -27,7 +27,7 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Please update configuration', style: TextStyle(fontSize: 20.0)),
+            Text('Please update configuration with your bridge information.', style: TextStyle(fontSize: 24.0, color: Colors.white), textAlign: TextAlign.center,),
             ElevatedButton(
                 child: Text('OK'), onPressed: () => Navigator.pushNamed(context, ConfigurationScreen.routeName)),
           ],
@@ -39,14 +39,14 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
       children: [
         Row(
           children: const [
-            Text("id",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+            Text("#",
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white)),
             SizedBox(width: 16.0),
             Text("Name",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white)),
             Spacer(),
             Text("State",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white))
           ],
         ),
         Container(
@@ -58,12 +58,12 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
                 print('error.log: ${snapshot.error.toString()}');
               }
               if (!snapshot.hasData) {
-                return Text("No Data");
+                return Text("No Data", style: TextStyle(color: Colors.white));
               }
               if (snapshot.hasData) {
                 List<LightModel> lights = snapshot.data as List<LightModel>;
                 if (lights.length == 0) {
-                  return Text("No lights to show");
+                  return Text("No lights to show", style: TextStyle(color: Colors.white));
                 }
                 ;
                 List<LightSwitchWidget> lightList = List.empty(growable: true);
