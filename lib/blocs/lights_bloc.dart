@@ -47,6 +47,25 @@ class LightsBloc with ChangeNotifier {
     } else {
       throw(response.body);
     }
-
   }
+
+  // https://developers.meethue.com/develop/hue-api/lights-api/#set-light-state
+  void toggleLight(BuildContext context, String lightId, bool state) async {
+    final toggledState = !state;
+    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
+    final ip = configProvider.ipAddress;
+    final username = configProvider.username;
+    final url = 'http://$ip/api/$username/lights/$lightId/state';
+    var body = json.encode({
+      "on": toggledState
+    });
+
+    try {
+      await http.put(Uri.parse(url), body: body);
+      notifyListeners();
+    } catch (error) {
+      throw(error);
+    }
+  }
+
 }
