@@ -39,14 +39,7 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
       children: [
         Row(
           children: const [
-            Text("#",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white)),
-            SizedBox(width: 16.0),
-            Text("Name",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white)),
-            Spacer(),
-            Text("State",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white))
+            Text("LIGHTS", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white)),
           ],
         ),
         Container(
@@ -91,3 +84,4 @@ class _LightsStateWidgetState extends State<LightsStateWidget> {
     );
   }
 }
+
