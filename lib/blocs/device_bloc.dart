@@ -1,0 +1,55 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart' as http;
+import 'package:lit/models/device_model.dart';
+import 'package:lit/providers/config_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
+
+class DeviceBloc with ChangeNotifier {
+  PublishSubject<List<DeviceModel>> deviceStream = PublishSubject<List<DeviceModel>>();
+
+  void mockDeviceStream() async {
+    Future<String> getJson() async {
+      return await rootBundle.loadString('lib/assets/device.json');
+    }
+
+    var json = await getJson();
+    Map<String, dynamic> data = jsonDecode(json);
+    final list = DeviceModel.deserialize(data['data']);
+    deviceStream.add(list);
+  }
+
+  void getDeviceStream(BuildContext context) async {
+
+    final configProvider = Provider.of<ConfigProvider>(context, listen: true);
+    final ip = configProvider.ipAddress;
+    final applicationKey = configProvider.username;
+
+    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/device');
+
+    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
+
+    late var response;
+
+    try {
+      response = await http.get(uri, headers: headers);
+    } catch(error) {
+      print(error);
+    }
+
+    if (response.statusCode == 200) {
+      final decoded = jsonDecode(response.body);
+      final devices = DeviceModel.deserialize(decoded['data']);
+      deviceStream.add(devices);
+      notifyListeners();
+    } else {
+      // TODO: follow API guidelines for error handling
+      final errors = jsonDecode(response.body);
+      throw(errors['errors']);
+    }
+  }
+
+}

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lit/blocs/lights_bloc.dart';
+import 'package:lit/blocs/device_bloc.dart';
 import 'package:lit/providers/config_provider.dart';
 import 'package:lit/screens/configuration_screen.dart';
 import 'package:lit/screens/home_page.dart';
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: LightsBloc()),
+        ChangeNotifierProvider.value(value: DeviceBloc()),
         ChangeNotifierProvider.value(value: ConfigProvider())
       ],
       child: MaterialApp(
