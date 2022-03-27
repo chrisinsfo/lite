@@ -1,64 +1,46 @@
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 /*
 Models a Device retrieved from the hue-api-v2
 https://developers.meethue.com/develop/hue-api-v2/api-reference/#resource_device_get
  */
 
+part 'device_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class DeviceModel {
   DeviceModel(this.metadata, this.services);
 
   @required final Metadata metadata;
-  @required final Services services;
+  @required final List<Service> services;
 
-  factory DeviceModel.fromJson(Map<String, dynamic> json) {
-    return DeviceModel(
-        Metadata.fromJson(json['metadata']),
-        Services.fromJson(json['services'])
-    );
+  factory DeviceModel.fromJson(Map<String, dynamic>json) => _$DeviceModelFromJson(json);
+  Map<String, dynamic> toJson() => _$DeviceModelToJson(this);
+  
+  static List<DeviceModel> deserialize(List<dynamic>json) {
+    return json.map((e) => DeviceModel.fromJson(e)).toList();
   }
 }
 
+@JsonSerializable()
 class Metadata {
   Metadata(this.archetype, this.name);
 
   @required final String archetype;
   @required final String name;
 
-  factory Metadata.fromJson(Map<String, dynamic> json) {
-    return Metadata(
-      json['archetype'],
-      json['name']
-    );
-  }
+  factory Metadata.fromJson(Map<String, dynamic>json) => _$MetadataFromJson(json);
+  Map<String, dynamic> toJson() => _$MetadataToJson(this);
 }
 
-class Services {
-  Services(this.services);
-
-  @required final List<Service> services;
-
-  factory Services.fromJson(List<Map<String, dynamic>> json) {
-    final List<Service> services = []..length = 0;
-
-    for (var service in json) {
-      services.add(Service.fromJson(service));
-    }
-
-    return Services(services);
-  }
-}
-
+@JsonSerializable()
 class Service {
   Service(this.rid, this.rtype);
 
   @required final String rid;
   @required final String rtype;
 
-  factory Service.fromJson(Map<String, dynamic>json) {
-    return Service(
-      json['rid'],
-      json['rtype']
-    );
-  }
+  factory Service.fromJson(Map<String, dynamic>json) => _$ServiceFromJson(json);
+  Map<String, dynamic> toJson() => _$ServiceToJson(this);
 }
