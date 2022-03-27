@@ -25,20 +25,21 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
     final config = Provider.of<ConfigProvider>(context, listen: true);
     if (EnvironmentUtility.environment() == Environment.DEVELOPMENT && _getMock == true) {
       devices.mockDeviceStream();
-    }
-    if (config.isValidConfig() && _getMock == false) {
-      devices.getDeviceStream(context);
     } else {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Please update configuration with your bridge information.', style: TextStyle(fontSize: 24.0, color: Colors.white), textAlign: TextAlign.center,),
-            ElevatedButton(
-                child: const Text('OK'), onPressed: () => Navigator.pushNamed(context, ConfigurationScreen.routeName)),
-          ],
-        ),
-      );
+      if (config.isValidConfig() && _getMock == false) {
+        devices.getDeviceStream(context);
+      } else {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Please update configuration with your bridge information.', style: TextStyle(fontSize: 24.0, color: Colors.white), textAlign: TextAlign.center,),
+              ElevatedButton(
+                  child: const Text('OK'), onPressed: () => Navigator.pushNamed(context, ConfigurationScreen.routeName)),
+            ],
+          ),
+        );
+      }
     }
 
     return Column(
