@@ -1,0 +1,100 @@
+{
+  "errors": [],
+  "data": [
+    {
+      "id": "1234",
+      "id_v1": "/lights/7",
+      "identify": {},
+      "metadata": {
+        "archetype": "spot_bulb",
+        "name": "LR 2"
+      },
+      "product_data": {
+        "certified": true,
+        "hardware_platform_type": "100b-104",
+        "manufacturer_name": "Signify Netherlands B.V.",
+        "model_id": "LCT003",
+        "product_archetype": "spot_bulb",
+        "product_name": "Hue color spot",
+        "software_version": "67.88.1"
+      },
+      "services": [
+        {
+          "rid": "1234",
+          "rtype": "light"
+        },
+        {
+          "rid": "1234",
+          "rtype": "zigbee_connectivity"
+        },
+        {
+          "rid": "1234",
+          "rtype": "entertainment"
+        }
+      ],
+      "type": "device"
+    },
+    {
+      "id": "1234",
+      "id_v1": "/lights/22",
+      "identify": {},
+      "metadata": {
+        "archetype": "sultan_bulb",
+        "name": "Dining Color 1"
+      },
+      "product_data": {
+        "certified": true,
+        "hardware_platform_type": "100b-114",
+        "manufacturer_name": "Signify Netherlands B.V.",
+        "model_id": "LCA003",
+        "product_archetype": "sultan_bulb",
+        "product_name": "Hue color lamp",
+        "software_version": "1.93.7"
+      },
+      "services": [
+        {
+          "rid": "1234",
+          "rtype": "light"
+        },
+        {
+          "rid": "1234",
+          "rtype": "zigbee_connectivity"
+        },
+        {
+          "rid": "1234",
+          "rtype": "entertainment"
+        }
+      ],
+      "type": "device"
+    },
+    {
+      "id": "1234",
+      "id_v1": "/lights/20",
+      "identify": {},
+      "metadata": {
+        "archetype": "classic_bulb",
+        "name": "Bedroom lite"
+      },
+      "product_data": {
+        "certified": false,
+        "hardware_platform_type": "10dc-4701",
+        "manufacturer_name": "GE_Appliances",
+        "model_id": "ZLL Light",
+        "product_archetype": "classic_bulb",
+        "product_name": "Dimmable light",
+        "software_version": "3.4.0"
+      },
+      "services": [
+        {
+          "rid": "1234",
+          "rtype": "light"
+        },
+        {
+          "rid": "1234",
+          "rtype": "zigbee_connectivity"
+        }
+      ],
+      "type": "device"
+    }
+  ]
+}
