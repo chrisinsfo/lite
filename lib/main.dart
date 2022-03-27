@@ -6,7 +6,17 @@ import 'package:lit/screens/home_page.dart';
 import 'package:lit/util/color_palette_utility.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+import 'package:lit/util/environment_utility.dart';
+import 'package:lit/util/network.dart';
+import 'dart:io';
+
+main(){
+  if (EnvironmentUtility.environment() == Environment.DEVELOPMENT) {
+    // bypass certificate validation
+    HttpOverrides.global = DevHttpOverrides();
+  }
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
