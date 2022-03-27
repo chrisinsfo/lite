@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lit/screens/configuration_screen.dart';
-import 'package:lit/screens/lights_state_widget.dart';
+import 'package:lit/screens/device_list_screen.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar,
       backgroundColor: Colors.black87,
       body: SingleChildScrollView(
-        child: Container(child: LightsStateWidget()),
+        child: Container(child: DeviceListScreen()),
       ),
     );
   }
