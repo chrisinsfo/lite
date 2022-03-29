@@ -10,8 +10,8 @@ part 'device_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class DeviceModel {
-  DeviceModel(this.metadata, this.services);
-
+  DeviceModel(this.id, this.metadata, this.services);
+  @required final String id;
   @required final Metadata metadata;
   @required final List<Service> services;
 

@@ -7,6 +7,7 @@ part of 'device_model.dart';
 // **************************************************************************
 
 DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
+      json['id'] as String,
       Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
       (json['services'] as List<dynamic>)
           .map((e) => Service.fromJson(e as Map<String, dynamic>))
@@ -15,6 +16,7 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
 
 Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'metadata': instance.metadata.toJson(),
       'services': instance.services.map((e) => e.toJson()).toList(),
     };
