@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: ConfigProvider())
       ],
       child: MaterialApp(
-        title: 'Lit',
+        title: 'Lite',
         home: HomePage(),
         routes: {
           HomePage.routeName: (ctx) => HomePage(),
