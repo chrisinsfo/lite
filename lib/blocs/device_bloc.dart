@@ -10,6 +10,7 @@ import 'package:rxdart/rxdart.dart';
 
 class DeviceBloc with ChangeNotifier {
   PublishSubject<List<DeviceModel>> deviceStream = PublishSubject<List<DeviceModel>>();
+  final Map<String, bool> lightsStateCache = Map<String, bool>();
 
   void mockDeviceStream() async {
     Future<String> getJson() async {
@@ -22,7 +23,40 @@ class DeviceBloc with ChangeNotifier {
     deviceStream.add(list);
   }
 
+  void getLightsState(BuildContext context) async {
+    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
+    final ip = configProvider.ipAddress;
+    final applicationKey = configProvider.username;
+
+    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light');
+
+    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
+
+    late var response;
+
+    try {
+      response = await http.get(uri, headers: headers);
+    } catch(error) {
+      print(error);
+    }
+
+    if (response.statusCode == 200) {
+      final decoded = jsonDecode(response.body);
+      final lights = decoded['data'];
+      for(var light in lights) {
+        lightsStateCache[light['owner']['rid']] = light['on']['on'];
+      }
+
+    } else {
+      // TODO: follow API guidelines for error handling
+      final errors = jsonDecode(response.body);
+      throw(errors['errors']);
+    }
+  }
+
   void getDeviceStream(BuildContext context) async {
+    getLightsState(context);
+
     final configProvider = Provider.of<ConfigProvider>(context, listen: false);
     final ip = configProvider.ipAddress;
     final applicationKey = configProvider.username;
