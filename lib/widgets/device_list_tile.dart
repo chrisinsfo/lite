@@ -17,7 +17,7 @@ class DeviceListTile extends StatelessWidget {
       child: ListTile(
         leading: const Icon(Icons.network_wifi, color: Colors.yellow),
         title: Text(deviceModel.metadata.name, style: const TextStyle(color: Colors.white)),
-        subtitle: Text(deviceModel.metadata.archetype, style: const TextStyle(color: Colors.white70)),
+        subtitle: Text(deviceModel.metadata.archetype.replaceAll('_', ' '), style: const TextStyle(color: Colors.white70)),
         //TODO: implement onChanged
         trailing: Switch(
             value: onState,
