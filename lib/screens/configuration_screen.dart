@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lit/providers/config_provider.dart';
+import 'package:lite/providers/config_provider.dart';
 import 'package:provider/provider.dart';
 
 class ConfigurationScreen extends StatefulWidget {

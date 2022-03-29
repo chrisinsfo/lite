@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lit/screens/configuration_screen.dart';
-import 'package:lit/screens/device_list_screen.dart';
+import 'package:lite/screens/configuration_screen.dart';
+import 'package:lite/screens/device_list_screen.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';

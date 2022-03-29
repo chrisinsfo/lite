@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'package:lit/models/device_model.dart';
+import 'package:lite/models/device_model.dart';
 
 main() {
   TestWidgetsFlutterBinding.ensureInitialized();

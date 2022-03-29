@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lit/models/device_model.dart';
+import 'package:lite/models/device_model.dart';
 
 class DeviceListTile extends StatelessWidget {
   const DeviceListTile(this.deviceModel);

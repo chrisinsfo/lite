@@ -3,12 +3,12 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:lit/blocs/device_bloc.dart';
-import 'package:lit/models/device_model.dart';
-import 'package:lit/widgets/device_list_tile.dart';
-import 'package:lit/providers/config_provider.dart';
-import 'package:lit/screens/configuration_screen.dart';
-import 'package:lit/util/environment_utility.dart';
+import 'package:lite/blocs/device_bloc.dart';
+import 'package:lite/models/device_model.dart';
+import 'package:lite/widgets/device_list_tile.dart';
+import 'package:lite/providers/config_provider.dart';
+import 'package:lite/screens/configuration_screen.dart';
+import 'package:lite/util/environment_utility.dart';
 
 import 'package:provider/provider.dart';
 

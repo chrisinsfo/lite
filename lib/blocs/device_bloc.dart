@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
-import 'package:lit/models/device_model.dart';
-import 'package:lit/providers/config_provider.dart';
+import 'package:lite/models/device_model.dart';
+import 'package:lite/providers/config_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 

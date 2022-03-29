@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lit/blocs/device_bloc.dart';
-import 'package:lit/providers/config_provider.dart';
-import 'package:lit/screens/configuration_screen.dart';
-import 'package:lit/screens/home_page.dart';
-import 'package:lit/util/color_palette_utility.dart';
+import 'package:lite/blocs/device_bloc.dart';
+import 'package:lite/providers/config_provider.dart';
+import 'package:lite/screens/configuration_screen.dart';
+import 'package:lite/screens/home_page.dart';
+import 'package:lite/util/color_palette_utility.dart';
 import 'package:provider/provider.dart';
 
-import 'package:lit/util/environment_utility.dart';
-import 'package:lit/util/network.dart';
+import 'package:lite/util/environment_utility.dart';
+import 'package:lite/util/network.dart';
 import 'dart:io';
 
 main(){
