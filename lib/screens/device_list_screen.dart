@@ -21,7 +21,7 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
   final _getMock = false;
   @override
   Widget build(BuildContext context) {
-    final devices = Provider.of<DeviceBloc>(context, listen: true);
+    final devices = Provider.of<DeviceBloc>(context, listen: false);
     final config = Provider.of<ConfigProvider>(context, listen: true);
     if (EnvironmentUtility.environment() == Environment.DEVELOPMENT && _getMock == true) {
       devices.mockDeviceStream();

@@ -23,8 +23,7 @@ class DeviceBloc with ChangeNotifier {
   }
 
   void getDeviceStream(BuildContext context) async {
-
-    final configProvider = Provider.of<ConfigProvider>(context, listen: true);
+    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
     final ip = configProvider.ipAddress;
     final applicationKey = configProvider.username;
 
