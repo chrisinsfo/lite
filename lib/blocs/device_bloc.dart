@@ -23,6 +23,25 @@ class DeviceBloc with ChangeNotifier {
     deviceStream.add(list);
   }
 
+  void toggleLight(BuildContext context, String lightId, bool state) async {
+    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
+    final ip = configProvider.ipAddress;
+    final applicationKey = configProvider.username;
+    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light/$lightId');
+    var body = json.encode({
+      "on": {"on" : state}
+    });
+
+    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
+
+    try {
+      await http.put(uri, body: body, headers: headers);
+      lightsStateCache[lightId] = state;
+    } catch (error) {
+      throw(error);
+    }
+  }
+
   void getLightsState(BuildContext context) async {
     final configProvider = Provider.of<ConfigProvider>(context, listen: false);
     final ip = configProvider.ipAddress;
