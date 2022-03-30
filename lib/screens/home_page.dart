@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lite/screens/configuration_screen.dart';
 import 'package:lite/screens/device_list_screen.dart';
+import 'package:lite/util/app_bar_dimension.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -26,11 +27,15 @@ class _HomePageState extends State<HomePage> {
           child: Text('Lit', textAlign: TextAlign.left, style: TextStyle(fontSize:40.0))),
     );
 
-    return Scaffold(
-      appBar: appBar,
-      backgroundColor: Colors.black87,
-      body: SingleChildScrollView(
-        child: Container(child: DeviceListScreen()),
+    return SafeArea(
+      child: Scaffold(
+        appBar: appBar,
+        backgroundColor: Colors.black87,
+        body: AppBarDimension(height: appBar.preferredSize.height,
+          child: SingleChildScrollView(
+            child: SafeArea(child: DeviceListScreen()),
+          ),
+        ),
       ),
     );
   }

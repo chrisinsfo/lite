@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:lite/blocs/device_bloc.dart';
 import 'package:lite/models/device_model.dart';
+import 'package:lite/util/app_bar_dimension.dart';
 import 'package:lite/widgets/device_list_tile.dart';
 import 'package:lite/providers/config_provider.dart';
 import 'package:lite/screens/configuration_screen.dart';
@@ -23,6 +24,8 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
   Widget build(BuildContext context) {
     final devices = Provider.of<DeviceBloc>(context, listen: false);
     final config = Provider.of<ConfigProvider>(context, listen: true);
+    final appBarDimension = context.dependOnInheritedWidgetOfExactType<AppBarDimension>()!;
+
     if (EnvironmentUtility.environment() == Environment.DEVELOPMENT && _getMock == true) {
       devices.mockDeviceStream();
     } else {
@@ -50,7 +53,7 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
           ],
         ),
         Container(
-          height: MediaQuery.of(context).size.height - 100.0,
+          height: MediaQuery.of(context).size.height - appBarDimension.height - AppBarDimension.statusBarHeight - 60.0,
           child: StreamBuilder(
             stream: devices.deviceStream,
             builder: (ctx, snapshot) {
