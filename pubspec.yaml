@@ -27,12 +27,13 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  http: ^0.13.0
   flutter:
     sdk: flutter
+  flutter_redux: ^0.9.0
   json_annotation: ^4.4.0
-  path_provider: ^2.0.9
-  http: ^0.13.0
   path: ^1.8.0
+  path_provider: ^2.0.9
   provider: ^6.0.2
   rxdart: ^0.27.3
   # The following adds the Cupertino Icons font to your application.
