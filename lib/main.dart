@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: DeviceBloc()),
+        Provider.value(value: DeviceBloc()),
         ChangeNotifierProvider.value(value: ConfigProvider())
       ],
       child: MaterialApp(

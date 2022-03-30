@@ -8,7 +8,7 @@ import 'package:lite/providers/config_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
-class DeviceBloc with ChangeNotifier {
+class DeviceBloc {
   PublishSubject<List<DeviceModel>> deviceStream = PublishSubject<List<DeviceModel>>();
   final Map<String, bool> lightsStateCache = Map<String, bool>();
 
@@ -96,7 +96,6 @@ class DeviceBloc with ChangeNotifier {
       final decoded = jsonDecode(response.body);
       final devices = DeviceModel.deserialize(decoded['data']);
       deviceStream.add(devices);
-      notifyListeners();
     } else {
       // TODO: follow API guidelines for error handling
       final errors = jsonDecode(response.body);
