@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black87,
         body: AppBarDimension(height: appBar.preferredSize.height,
           child: SingleChildScrollView(
-            child: SafeArea(child: DeviceListScreen()),
+            child: DeviceListScreen(),
           ),
         ),
       ),
