@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black87,
       title: Align(
           alignment: Alignment.topLeft,
-          child: Text('Lit', textAlign: TextAlign.left, style: TextStyle(fontSize:40.0))),
+          child: Text('Lite', textAlign: TextAlign.left, style: TextStyle(fontSize:40.0))),
     );
 
     return SafeArea(
