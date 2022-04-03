@@ -24,7 +24,9 @@ class DeviceListScreen extends StatelessWidget {
     return StoreConnector<AppState, Config>(
         converter: (Store<AppState> store) => store.state.config,
         builder: (context, config) {
-          devices.getDeviceStream(context, config);
+          if (ValidateConfigAction().isValidConfig(config)) {
+            devices.getDeviceStream(context, config);
+          }
           return ValidateConfigAction().isValidConfig(config)
               ? Column(
             children: [
