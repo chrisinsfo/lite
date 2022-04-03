@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider.value(value: DeviceBloc()),
       ],
-      child: StoreProvider(
+      child: StoreProvider<AppState>(
         store: store,
         child: MaterialApp(
           title: 'Lite',
