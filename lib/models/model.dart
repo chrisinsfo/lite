@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-// represent app state
+// represent whole app state
 class AppState {
   final Config config;
 
@@ -10,9 +10,10 @@ class AppState {
 }
 
 class Config {
-  Config(this.ipAddress, this.username);
   final String ipAddress;
   final String username;
+
+  Config(this.ipAddress, this.username);
 
   Config.empty() : this.username = 'Unknown', this.ipAddress = 'Unknown';
 }
