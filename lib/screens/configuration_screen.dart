@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lite/redux/actions.dart';
 import 'package:redux/redux.dart';
 
 import 'package:lite/models/model.dart';
@@ -12,13 +13,16 @@ class ConfigurationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // onIPSaved(value) {
-    //   configProvider.setIP(value);
-    // }
-    //
-    // onUsernameSaved(value) {
-    //   configProvider.setUsername(value);
-    // }
+    String ip = Config.empty().ipAddress;
+    String username = Config.empty().username;
+
+    onIPSaved(value) {
+      ip = value.toString().isNotEmpty ? value : Config.empty().ipAddress;
+    }
+
+    onUsernameSaved(value) {
+      username = value.toString().isNotEmpty ? value : Config.empty().username;;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +40,7 @@ class ConfigurationScreen extends StatelessWidget {
                 children: [
                   const Text('IP Address', textAlign: TextAlign.left),
                   TextFormField(
-                    onSaved: null,
+                    onSaved: onIPSaved,
                     maxLines: 1,
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
@@ -46,7 +50,7 @@ class ConfigurationScreen extends StatelessWidget {
                   ),
                   const Text('Username', textAlign: TextAlign.left),
                   TextFormField(
-                    onSaved: null,
+                    onSaved: onUsernameSaved,
                     maxLines: 2,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
@@ -64,14 +68,19 @@ class ConfigurationScreen extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                         ),
-                        ElevatedButton(
-                          child: const Text('Save'),
-                          onPressed: () {
-                            if (_globalKey.currentState!.validate()) {
-                              _globalKey.currentState!.save();
-                            }
-                            Navigator.pop(context);
-                          },
+                        StoreConnector<AppState, VoidCallback>(
+                          converter: (store) { return () => store.dispatch(SetConfigAction(Config(ip, username))); },
+                          builder: (context, callback) =>
+                          ElevatedButton(
+                            child: const Text('Save'),
+                            onPressed: () {
+                              if (_globalKey.currentState!.validate()) {
+                                _globalKey.currentState!.save();
+                                callback();
+                              }
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                       ],
                     ),
