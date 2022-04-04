@@ -3,14 +3,9 @@ import 'package:lite/screens/configuration_screen.dart';
 import 'package:lite/screens/device_list_screen.dart';
 import 'package:lite/util/app_bar_dimension.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   static const routeName = '/home-page';
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
