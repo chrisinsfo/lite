@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:lite/models/model.dart';
 import 'package:lite/models/device_model.dart';
@@ -60,7 +59,6 @@ class DeviceBloc {
   }
 
   void getDeviceStream(BuildContext context, Config config) async {
-    print('getDeviceStream');
     getLightsState(context, config);
 
     final ip = config.ipAddress;
