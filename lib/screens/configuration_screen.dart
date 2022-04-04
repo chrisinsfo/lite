@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lite/models/model.dart';
 import 'package:lite/redux/actions.dart';
 import 'package:redux/redux.dart';
-
-import 'package:lite/models/model.dart';
 
 class ConfigurationScreen extends StatelessWidget {
   static const routeName = 'config_screen';
@@ -21,7 +20,7 @@ class ConfigurationScreen extends StatelessWidget {
     }
 
     onUsernameSaved(value) {
-      username = value.toString().isNotEmpty ? value : Config.empty().username;;
+      username = value.toString().isNotEmpty ? value : Config.empty().username;
     }
 
     return Scaffold(
