@@ -1,32 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
+import 'package:lite/models/model.dart';
 import 'package:lite/models/device_model.dart';
-import 'package:lite/providers/config_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DeviceBloc {
   PublishSubject<List<DeviceModel>> deviceStream = PublishSubject<List<DeviceModel>>();
   final Map<String, bool> lightsStateCache = Map<String, bool>();
 
-  void mockDeviceStream() async {
-    Future<String> getJson() async {
-      return await rootBundle.loadString('lib/assets/device.json');
-    }
-
-    var json = await getJson();
-    Map<String, dynamic> data = jsonDecode(json);
-    final list = DeviceModel.deserialize(data['data']);
-    deviceStream.add(list);
-  }
-
-  void toggleLight(BuildContext context, String lightId, bool state) async {
-    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
-    final ip = configProvider.ipAddress;
-    final applicationKey = configProvider.username;
+  void toggleLight(BuildContext context, Config config, String lightId, bool state) async {
+    final ip = config.ipAddress;
+    final applicationKey = config.username;
     final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light/$lightId');
     var body = json.encode({
       "on": {"on" : state}
@@ -42,10 +28,9 @@ class DeviceBloc {
     }
   }
 
-  void getLightsState(BuildContext context) async {
-    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
-    final ip = configProvider.ipAddress;
-    final applicationKey = configProvider.username;
+  void getLightsState(BuildContext context, Config config) async {
+    final ip = config.ipAddress;
+    final applicationKey = config.username;
 
     final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light');
 
@@ -73,12 +58,11 @@ class DeviceBloc {
     }
   }
 
-  void getDeviceStream(BuildContext context) async {
-    getLightsState(context);
+  void getDeviceStream(BuildContext context, Config config) async {
+    getLightsState(context, config);
 
-    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
-    final ip = configProvider.ipAddress;
-    final applicationKey = configProvider.username;
+    final ip = config.ipAddress;
+    final applicationKey = config.username;
 
     final Uri uri = Uri.parse('https://$ip/clip/v2/resource/device');
 
