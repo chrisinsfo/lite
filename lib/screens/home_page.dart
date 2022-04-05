@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lite/screens/configuration_screen.dart';
+import 'package:lite/containers/config_container.dart';
 import 'package:lite/screens/device_list_screen.dart';
 import 'package:lite/util/app_bar_dimension.dart';
 
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         IconButton(
             icon: Icon(Icons.network_wifi),
             onPressed: () =>
-                Navigator.pushNamed(context, ConfigurationScreen.routeName)),
+                Navigator.pushNamed(context, ConfigContainer.routeName)),
       ],
       backgroundColor: Colors.black87,
       title: Align(

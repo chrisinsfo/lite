@@ -11,7 +11,7 @@ import 'package:lite/models/device_model.dart';
 import 'package:lite/models/model.dart';
 import 'package:lite/util/app_bar_dimension.dart';
 import 'package:lite/widgets/device_list_tile.dart';
-import 'package:lite/screens/configuration_screen.dart';
+import 'package:lite/containers/config_container.dart';
 
 import 'package:provider/provider.dart';
 
@@ -96,7 +96,7 @@ class DeviceListScreen extends StatelessWidget {
                     child: const Text('OK'),
                     onPressed: () =>
                         Navigator.pushNamed(
-                            context, ConfigurationScreen.routeName)),
+                            context, ConfigContainer.routeName)),
               ],
             ),
           );
