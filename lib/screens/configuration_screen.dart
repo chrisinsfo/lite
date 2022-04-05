@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lite/models/model.dart';
-import 'package:lite/redux/actions.dart';
-import 'package:redux/redux.dart';
 
 class ConfigurationScreen extends StatelessWidget {
-  static const routeName = 'config_screen';
+
+  Function(Config) onSetConfig;
+  Config config;
+
+  ConfigurationScreen(this.config, this.onSetConfig);
 
   final _globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
 
-    String ip = Config.empty().ipAddress;
-    String username = Config.empty().username;
+    String ip = config.ipAddress;
+    String username = config.username;
 
     onIPSaved(value) {
       ip = value.toString().isNotEmpty ? value : Config.empty().ipAddress;
@@ -28,9 +29,7 @@ class ConfigurationScreen extends StatelessWidget {
         title: const Text('Configuration'),
         backgroundColor: Colors.black87,
       ),
-      body: StoreConnector<AppState, Config>(
-        converter: (Store<AppState> store) => store.state.config,
-        builder: (context, config) => Column(
+      body: Column(
           children: [
             Form(
               key: _globalKey,
@@ -67,20 +66,17 @@ class ConfigurationScreen extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                         ),
-                        StoreConnector<AppState, VoidCallback>(
-                          converter: (store) { return () => store.dispatch(SetConfigAction(Config(ip, username))); },
-                          builder: (context, callback) =>
-                          ElevatedButton(
+                        ElevatedButton(
                             child: const Text('Save'),
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
                                 _globalKey.currentState!.save();
-                                callback();
+                                onSetConfig(Config(ip, username));
                               }
                               Navigator.pop(context);
                             },
                           ),
-                        ),
+
                       ],
                     ),
                   )
@@ -89,7 +85,6 @@ class ConfigurationScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }
