@@ -61,12 +61,14 @@ class ConfigurationScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
+                          key: const ValueKey('cancelConfigButton'),
                           child: const Text('Cancel'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         ElevatedButton(
+                            key: const ValueKey('saveConfigButton'),
                             child: const Text('Save'),
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
