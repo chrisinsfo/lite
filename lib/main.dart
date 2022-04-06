@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import 'package:lite/blocs/device_bloc.dart';
+import 'package:lite/containers/config_container.dart';
 import 'package:lite/models/model.dart';
 import 'package:lite/redux/reducers.dart';
-import 'package:lite/containers/config_container.dart';
 import 'package:lite/screens/home_page.dart';
 import 'package:lite/util/color_palette_utility.dart';
-import 'package:provider/provider.dart';
-
 import 'package:lite/util/environment_utility.dart';
 import 'package:lite/util/network.dart';
 import 'dart:io';
@@ -32,11 +29,7 @@ class MyApp extends StatelessWidget {
       initialState: AppState.initialState()
     );
 
-    return MultiProvider(
-      providers: [
-        Provider.value(value: DeviceBloc()),
-      ],
-      child: StoreProvider<AppState>(
+    return StoreProvider<AppState>(
         store: store,
         child: MaterialApp(
           title: 'Lite',
@@ -54,7 +47,6 @@ class MyApp extends StatelessWidget {
               elevatedButtonTheme: ElevatedButtonThemeData(style: ColorPaletteUtility.elevatedButtonStyle)
           ),
         ),
-      ),
-    );
+      );
   }
 }
