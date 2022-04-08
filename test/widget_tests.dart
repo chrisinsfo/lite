@@ -10,7 +10,7 @@ import 'package:lite/screens/configuration_screen.dart';
     testWidgets('ConfigurationScreen has expected widgets and text', (WidgetTester tester) async {
       String ip = '123.456.789';
       String username = 'hue_user';
-      final Config config = Config(ip, username);
+      final Config config = Config(ip, username, true);
 
       Function onTap (Config config) => (config) {};
 

@@ -73,12 +73,11 @@ class ConfigurationScreen extends StatelessWidget {
                             onPressed: () {
                               if (_globalKey.currentState!.validate()) {
                                 _globalKey.currentState!.save();
-                                onSetConfig(Config(ip, username));
+                                onSetConfig(Config(ip, username, false));
                               }
                               Navigator.pop(context);
                             },
                           ),
-
                       ],
                     ),
                   )
