@@ -10,15 +10,6 @@ class SetConfigAction {
   SetConfigAction(this.config);
 }
 
-class ValidateConfigAction {
-  bool isValidConfig(Config config) {
-    return config.ipAddress.isNotEmpty
-        && !(config.ipAddress == 'Unknown')
-        && config.username.isNotEmpty
-        && !(config.username == 'Unknown');
-  }
-}
-
 class ToggleLightAction {
   final Config _config;
   final Map<String, bool> lightsStateCache;
