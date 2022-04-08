@@ -13,7 +13,9 @@ AppState appStateReducer(AppState state, action) {
             a.config.ipAddress.isNotEmpty
                 && !(a.config.ipAddress == 'Unknown')
                 && a.config.username.isNotEmpty
-                && !(a.config.username == 'Unknown'))
+                && !(a.config.username == 'Unknown')),
+        state.deviceList,
+        state.lightsStateCache
     );
   }
   return state;

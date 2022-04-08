@@ -1,12 +1,18 @@
-import 'package:flutter/foundation.dart';
+import 'package:lite/models/device_model.dart';
 
 // represent whole app state
 class AppState {
   final Config config;
+  final List<DeviceModel> deviceList;
+  // can be evolved to handle more complex state
+  final Map<String, bool> lightsStateCache;
 
-  AppState(this.config);
+  AppState(this.config, this.deviceList, this.lightsStateCache);
 
-  AppState.initialState() : this.config = Config.empty();
+  AppState.initialState()
+      : config = Config.empty(),
+        deviceList = <DeviceModel>[],
+        lightsStateCache = <String, bool>{};
 }
 
 class Config {
