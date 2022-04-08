@@ -3,7 +3,6 @@
  */
 
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lite/redux/actions.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter/material.dart';
 import 'package:lite/blocs/device_bloc.dart';
@@ -24,10 +23,10 @@ class DeviceListScreen extends StatelessWidget {
     return StoreConnector<AppState, Config>(
         converter: (Store<AppState> store) => store.state.config,
         builder: (context, config) {
-          if (ValidateConfigAction().isValidConfig(config)) {
+          if (config.isValid) {
             devices.getDeviceStream(context, config);
           }
-          return ValidateConfigAction().isValidConfig(config)
+          return config.isValid
               ? Column(
             children: [
               Row(
