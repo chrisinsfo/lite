@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lite/redux/middleware.dart';
 import 'package:redux/redux.dart';
 
 import 'package:lite/containers/config_container.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
 
     final Store<AppState> store = Store<AppState>(
       appStateReducer,
-      initialState: AppState.initialState()
+      initialState: AppState.initialState(),
+      middleware: [deviceApiMiddleware]
     );
 
     return StoreProvider<AppState>(

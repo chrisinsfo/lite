@@ -18,5 +18,16 @@ AppState appStateReducer(AppState state, action) {
         state.lightsStateCache
     );
   }
+
+  if (action is GetDevicesAction) {
+    // middleware will intercept GetDevicesAction and trigger async call to devices api
+    return state;
+  }
+
+  if (action is FetchedDevicesAction) {
+    final FetchedDevicesAction a = action;
+    return AppState(state.config, a.deviceList, state.lightsStateCache);
+  }
+
   return state;
 }

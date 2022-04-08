@@ -81,30 +81,11 @@ class GetDevicesAction {
 
   GetDevicesAction(this.config, this.deviceList);
 
-  Future getDevices() async {
-    final ip = config.ipAddress;
-    final applicationKey = config.username;
+}
 
-    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/device');
+class FetchedDevicesAction {
+  final Config config;
+  List<DeviceModel> deviceList;
 
-    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
-
-    late var response;
-
-    try {
-      response = await http.get(uri, headers: headers);
-    } catch(error) {
-      print(error);
-    }
-
-    if (response.statusCode == 200) {
-      final decoded = jsonDecode(response.body);
-      deviceList = DeviceModel.deserialize(decoded['data']);
-    } else {
-      // TODO: follow API guidelines for error handling
-      final errors = jsonDecode(response.body);
-      throw(errors['errors']);
-    }
-  }
-
+  FetchedDevicesAction(this.config, this.deviceList);
 }
