@@ -1,19 +1,20 @@
 import 'package:lite/models/model.dart';
 import 'package:lite/redux/actions.dart';
+import 'package:lite/redux/selectors.dart';
 
 // called every time we want to commit a change to store
 AppState appStateReducer(AppState state, action) {
 
-  if (action is SetConfigAction) {
-    SetConfigAction a = action;
+  if (action is WillSetConfigAction) {
+    WillSetConfigAction a = action;
+    final isValid = isValidConfig(a.config);
+
     return AppState(
+        isValid ? ApplicationState.validConfig : ApplicationState.invalidConfig,
         Config(
             a.config.ipAddress,
             a.config.username,
-            a.config.ipAddress.isNotEmpty
-                && !(a.config.ipAddress == 'Unknown')
-                && a.config.username.isNotEmpty
-                && !(a.config.username == 'Unknown')),
+            isValid),
         state.deviceList,
         state.lightsStateCache
     );
@@ -21,12 +22,12 @@ AppState appStateReducer(AppState state, action) {
 
   if (action is GetDevicesAction) {
     // middleware will intercept GetDevicesAction and trigger async call to devices api
-    return state;
+    return AppState(ApplicationState.fetchingDevices, state.config, state.deviceList, state.lightsStateCache);
   }
 
   if (action is FetchedDevicesAction) {
     final FetchedDevicesAction a = action;
-    return AppState(state.config, a.deviceList, state.lightsStateCache);
+    return AppState(ApplicationState.fetchedDevices, state.config, a.deviceList, state.lightsStateCache);
   }
 
   return state;
