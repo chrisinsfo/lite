@@ -1,7 +1,15 @@
 import 'package:lite/models/device_model.dart';
 
 enum ApplicationState {
-   initialState, emptyConfig, invalidConfig, validConfig, fetchingDevices, fetchedDevices, fetchingLightsState, fetchedLightsState
+  initialState,
+  emptyConfig,
+  invalidConfig,
+  validConfig,
+  fetchingDevices,
+  fetchedDevices,
+  fetchingLightsState,
+  fetchedLightsState,
+  userInteractive
 }
 
 // represent whole app state
@@ -29,5 +37,8 @@ class Config {
 
   Config(this.ipAddress, this.username, this.isValid);
 
-  Config.empty() : this.username = 'Unknown', this.ipAddress = 'Unknown', this.isValid = false;
+  Config.empty()
+      : this.username = 'Unknown',
+        this.ipAddress = 'Unknown',
+        this.isValid = false;
 }
