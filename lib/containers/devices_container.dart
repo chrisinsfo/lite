@@ -31,6 +31,11 @@ class _ViewModel {
     if (store.state.applicationState == ApplicationState.validConfig) {
       store.dispatch(GetDevicesAction(store.state.config, store.state.deviceList));
     }
+
+    if (store.state.applicationState == ApplicationState.fetchedDevices) {
+      store.dispatch(GetLightsStateAction(store.state.lightsStateCache));
+    }
+
     return _ViewModel(store.state.deviceList, store.state.config, store.state.lightsStateCache);
   }
 }

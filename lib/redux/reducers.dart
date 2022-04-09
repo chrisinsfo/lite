@@ -30,5 +30,15 @@ AppState appStateReducer(AppState state, action) {
     return AppState(ApplicationState.fetchedDevices, state.config, a.deviceList, state.lightsStateCache);
   }
 
+  if (action is GetLightsStateAction) {
+    final GetLightsStateAction a = action;
+    return AppState(ApplicationState.fetchingLightsState, state.config, state.deviceList, state.lightsStateCache);
+  }
+
+  if (action is FetchedLightsStateAction) {
+    final FetchedLightsStateAction a = action;
+    return AppState(ApplicationState.fetchedLightsState, state.config, state.deviceList, a.lightsStateCache);
+  }
+
   return state;
 }

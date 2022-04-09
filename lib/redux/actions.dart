@@ -39,40 +39,15 @@ class ToggleLightAction {
 }
 
 class GetLightsStateAction {
-  final Map<String, bool> lightsStateCache = Map<String, bool>();
+  final Map<String, bool> lightsStateCache;
 
-  final Config _config;
-  GetLightsStateAction(this._config);
+  GetLightsStateAction(this.lightsStateCache);
+}
 
-    Future getLightsState() async {
-      final ip = _config.ipAddress;
-      final applicationKey = _config.username;
+class FetchedLightsStateAction {
+  final Map<String, bool> lightsStateCache;
 
-      final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light');
-
-      final Map<String, String> headers = { 'hue-application-key' : applicationKey };
-
-      late var response;
-
-      try {
-        response = await http.get(uri, headers: headers);
-      } catch(error) {
-        print(error);
-      }
-
-      if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
-        final lights = decoded['data'];
-        for(var light in lights) {
-          lightsStateCache[light['owner']['rid']] = light['on']['on'];
-        }
-
-      } else {
-        // TODO: follow API guidelines for error handling
-        final errors = jsonDecode(response.body);
-        throw(errors['errors']);
-      }
-    }
+  FetchedLightsStateAction(this.lightsStateCache);
 }
 
 class GetDevicesAction {

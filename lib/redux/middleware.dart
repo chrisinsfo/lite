@@ -43,3 +43,43 @@ void deviceApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
 
   next(action);
 }
+
+void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) {
+
+  void getLightsState() async {
+    final Map<String, bool> lightsStateCache = <String, bool>{};
+    final ip = store.state.config.ipAddress;
+    final applicationKey = store.state.config.username;
+
+    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light');
+
+    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
+
+    late var response;
+
+    try {
+      response = await http.get(uri, headers: headers);
+    } catch(error) {
+      print(error);
+    }
+
+    if (response.statusCode == 200) {
+      final decoded = jsonDecode(response.body);
+      final lights = decoded['data'];
+      for(var light in lights) {
+        lightsStateCache[light['owner']['rid']] = light['on']['on'];
+      }
+      store.dispatch(FetchedLightsStateAction(lightsStateCache));
+    } else {
+      // TODO: follow API guidelines for error handling
+      final errors = jsonDecode(response.body);
+      throw(errors['errors']);
+    }
+  }
+
+  if (action is GetLightsStateAction) {
+    getLightsState();
+  }
+
+  next(action);
+}

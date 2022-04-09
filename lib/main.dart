@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     final Store<AppState> store = Store<AppState>(
       appStateReducer,
       initialState: AppState.initialState(),
-      middleware: [deviceApiMiddleware]
+      middleware: [deviceApiMiddleware, lightsApiMiddleware]
     );
 
     return StoreProvider<AppState>(
