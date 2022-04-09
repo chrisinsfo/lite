@@ -82,10 +82,11 @@ void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
     final applicationKey = store.state.config.username;
     var lightsStateCache = store.state.lightsStateCache;
     final state = lightsStateCache[lightId] ?? false;
+    final newState = !state;
 
     final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light/$lightId');
     var body = json.encode({
-      "on": {"on" : !state}
+      "on": {"on" : newState}
     });
 
     final Map<String, String> headers = { 'hue-application-key' : applicationKey };
@@ -99,7 +100,7 @@ void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
     }
 
     if (response.statusCode == 200) {
-      lightsStateCache[lightId] = !state;
+      lightsStateCache[lightId] = newState;
       store.dispatch(UpdatedLightStateAction(lightsStateCache));
     } else {
       final errors = jsonDecode(response.body);
