@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:lite/models/model.dart';
-import 'package:http/http.dart' as http;
 import 'package:lite/models/device_model.dart';
 
 class WillSetConfigAction {
@@ -11,31 +8,15 @@ class WillSetConfigAction {
 }
 
 class ToggleLightAction {
-  final Config _config;
+  String lightId;
+
+  ToggleLightAction(this.lightId);
+}
+
+class UpdatedLightStateAction {
   final Map<String, bool> lightsStateCache;
-  ToggleLightAction(this._config, this.lightsStateCache);
 
-  Future toggleLight(String lightId) async {
-    final ip = _config.ipAddress;
-    final applicationKey = _config.username;
-    var state = lightsStateCache[lightId];
-
-    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light/$lightId');
-    var body = json.encode({
-      "on": {"on" : state}
-    });
-
-    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
-
-    try {
-      await http.put(uri, body: body, headers: headers);
-      if (state != null) {
-        lightsStateCache[lightId] = state;
-      }
-    } catch (error) {
-      print(error);
-    }
-  }
+  UpdatedLightStateAction(this.lightsStateCache);
 }
 
 class GetLightsStateAction {
