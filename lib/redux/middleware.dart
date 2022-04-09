@@ -29,7 +29,7 @@ void deviceApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
     if (response.statusCode == 200) {
       final decoded = jsonDecode(response.body);
       deviceList = DeviceModel.deserialize(decoded['data']);
-      store.dispatch(FetchedDevicesAction(store.state.config, deviceList));
+      store.dispatch(FetchedDevicesAction(deviceList));
     } else {
       // TODO: follow API guidelines for error handling
       final errors = jsonDecode(response.body);

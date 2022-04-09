@@ -80,12 +80,10 @@ class GetDevicesAction {
   List<DeviceModel> deviceList;
 
   GetDevicesAction(this.config, this.deviceList);
-
 }
 
 class FetchedDevicesAction {
-  final Config config;
   List<DeviceModel> deviceList;
 
-  FetchedDevicesAction(this.config, this.deviceList);
+  FetchedDevicesAction(this.deviceList);
 }
