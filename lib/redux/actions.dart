@@ -4,10 +4,10 @@ import 'package:lite/models/model.dart';
 import 'package:http/http.dart' as http;
 import 'package:lite/models/device_model.dart';
 
-class SetConfigAction {
+class WillSetConfigAction {
   final Config config;
 
-  SetConfigAction(this.config);
+  WillSetConfigAction(this.config);
 }
 
 class ToggleLightAction {
