@@ -13,8 +13,9 @@ class DeviceListScreen extends StatelessWidget {
   final List<DeviceModel> deviceList;
   final Config config;
   final Map<String, bool> lightsStateCache;
+  Function(String) onToggle;
 
-  DeviceListScreen(this.deviceList, this.config, this.lightsStateCache);
+  DeviceListScreen(this.deviceList, this.config, this.lightsStateCache, this.onToggle);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +47,7 @@ class DeviceListScreen extends StatelessWidget {
                           style: TextStyle(color: Colors.white));
                     } else {
                       final model = deviceList[index];
-                      //TODO: pass store.dispatch(ToggleLightAction)
-                      return DeviceListTile(model, lightsStateCache[model.id] ?? false, (bool) => bool );
+                      return DeviceListTile(model, lightsStateCache[model.id] ?? false, onToggle);
                     }
                   },
                 ),

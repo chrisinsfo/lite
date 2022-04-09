@@ -4,7 +4,7 @@ import 'package:lite/models/device_model.dart';
 class DeviceListTile extends StatefulWidget {
   final DeviceModel deviceModel;
   var onState = false;
-  Function toggleOnState;
+  Function(String) toggleOnState;
 
   DeviceListTile(this.deviceModel, this.onState, this.toggleOnState);
 
@@ -13,7 +13,8 @@ class DeviceListTile extends StatefulWidget {
 }
 
 class _DeviceListTileState extends State<DeviceListTile> {
-
+  //TODO: local state
+  
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,7 +29,7 @@ class _DeviceListTileState extends State<DeviceListTile> {
               onChanged: (bool newValue) {
                 setState(() {
                   widget.onState = newValue;
-                  //TODO: toggleLight
+                  widget.toggleOnState(widget.deviceModel.id);
                   // deviceBloc.toggleLight(context, config, widget.deviceModel.services.first.rid, onState);
                 });
               },
@@ -38,8 +39,7 @@ class _DeviceListTileState extends State<DeviceListTile> {
               onChanged: (bool newValue) {
                 setState(() {
                   widget.onState = newValue;
-                  //TODO: toggleLight
-                  // deviceBloc.toggleLight(context, config, widget.deviceModel.services.first.rid, onState);
+                  widget.toggleOnState(widget.deviceModel.id);
                 });
               },
               trackColor: MaterialStateProperty.all(Colors.orange)

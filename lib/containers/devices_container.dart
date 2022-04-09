@@ -15,7 +15,7 @@ class DevicesContainer extends StatelessWidget {
       // the resulting viewModel will be passed into the builder function
         converter: _ViewModel.fromStore,
         builder: (context, vm) =>
-            DeviceListScreen(vm.deviceList, vm.config, vm.lightsStateCache)
+            DeviceListScreen(vm.deviceList, vm.config, vm.lightsStateCache, vm.onToggle)
     );
   }
 }
@@ -24,8 +24,9 @@ class _ViewModel {
   List<DeviceModel> deviceList;
   Config config;
   Map<String, bool> lightsStateCache;
+  Function(String) onToggle;
 
-  _ViewModel(this.deviceList, this.config, this.lightsStateCache);
+  _ViewModel(this.deviceList, this.config, this.lightsStateCache, this.onToggle);
 
   static _ViewModel fromStore(Store<AppState> store) {
     if (store.state.applicationState == ApplicationState.validConfig) {
@@ -36,6 +37,10 @@ class _ViewModel {
       store.dispatch(GetLightsStateAction(store.state.lightsStateCache));
     }
 
-    return _ViewModel(store.state.deviceList, store.state.config, store.state.lightsStateCache);
+    return _ViewModel(
+        store.state.deviceList,
+        store.state.config,
+        store.state.lightsStateCache,
+        (lightId) => store.dispatch(ToggleLightAction(lightId)));
   }
 }
