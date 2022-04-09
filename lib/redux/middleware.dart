@@ -78,26 +78,32 @@ void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
   }
 
   void toggleLight(String lightId) async {
-    final Map<String, bool> lightsStateCache = <String, bool>{};
     final ip = store.state.config.ipAddress;
     final applicationKey = store.state.config.username;
-    var state = lightsStateCache[lightId];
+    var lightsStateCache = store.state.lightsStateCache;
+    final state = lightsStateCache[lightId] ?? false;
 
     final Uri uri = Uri.parse('https://$ip/clip/v2/resource/light/$lightId');
     var body = json.encode({
-      "on": {"on" : state}
+      "on": {"on" : !state}
     });
 
     final Map<String, String> headers = { 'hue-application-key' : applicationKey };
 
+    late var response;
+
     try {
-      await http.put(uri, body: body, headers: headers);
-      if (state != null) {
-        lightsStateCache[lightId] = state;
-        store.dispatch(UpdatedLightStateAction(lightsStateCache));
-      }
+      response = await http.put(uri, body: body, headers: headers);
     } catch (error) {
       print(error);
+    }
+
+    if (response.statusCode == 200) {
+      lightsStateCache[lightId] = !state;
+      store.dispatch(UpdatedLightStateAction(lightsStateCache));
+    } else {
+      final errors = jsonDecode(response.body);
+      throw(errors['errors']);
     }
   }
 

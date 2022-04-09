@@ -41,6 +41,7 @@ AppState appStateReducer(AppState state, action) {
   }
 
   if (action is ToggleLightAction) {
+    final ToggleLightAction a = action;
     return AppState(ApplicationState.userInteractive, state.config, state.deviceList, state.lightsStateCache);
   }
 
