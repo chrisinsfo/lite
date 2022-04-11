@@ -11,8 +11,8 @@ void deviceApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
   void getDevices() async {
     List<DeviceModel> deviceList;
     final GetDevicesAction a = action;
-    final ip = a.config.ipAddress;
-    final applicationKey = a.config.username;
+    final ip = store.state.config.ipAddress;
+    final applicationKey = store.state.config.username;
 
     final Uri uri = Uri.parse('https://$ip/clip/v2/resource/device');
 

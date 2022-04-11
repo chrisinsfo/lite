@@ -32,10 +32,9 @@ class FetchedLightsStateAction {
 }
 
 class GetDevicesAction {
-  final Config config;
   List<DeviceModel> deviceList;
 
-  GetDevicesAction(this.config, this.deviceList);
+  GetDevicesAction(this.deviceList);
 }
 
 class FetchedDevicesAction {
