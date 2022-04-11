@@ -14,7 +14,7 @@ void main() {
       );
 
       store
-          .dispatch(WillSetConfigAction(Config('123.456.78.9', 'Mark', false)));
+          .dispatch(SetConfigAction(Config('123.456.78.9', 'Mark', false)));
 
       expect(store.state.config.isValid, true);
       expect(store.state.config.username, 'Mark');
@@ -27,7 +27,7 @@ void main() {
         initialState: AppState.initialState(),
       );
 
-      store.dispatch(WillSetConfigAction(Config('Unknown', 'Mark', false)));
+      store.dispatch(SetConfigAction(Config('Unknown', 'Mark', false)));
 
       expect(store.state.config.isValid, false);
     });

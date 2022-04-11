@@ -29,7 +29,7 @@ class _ViewModel {
     return _ViewModel(
         config: store.state.config,
         onSetConfig: (config) {
-          store.dispatch(WillSetConfigAction(config));
+          store.dispatch(SetConfigAction(config));
         });
   }
 }

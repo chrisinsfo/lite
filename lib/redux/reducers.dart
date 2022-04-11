@@ -5,8 +5,8 @@ import 'package:lite/redux/selectors.dart';
 // called every time we want to commit a change to store
 AppState appStateReducer(AppState state, action) {
 
-  if (action is WillSetConfigAction) {
-    WillSetConfigAction a = action;
+  if (action is SetConfigAction) {
+    SetConfigAction a = action;
     final isValid = isValidConfig(a.config);
 
     return AppState(
