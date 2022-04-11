@@ -21,6 +21,10 @@ class DeviceModel {
   static List<DeviceModel> deserialize(List<dynamic>json) {
     return json.map((e) => DeviceModel.fromJson(e)).toList();
   }
+
+  static List<DeviceModel> copyWith(List<DeviceModel>devices ) {
+    return <DeviceModel>[...devices];
+  }
 }
 
 @JsonSerializable()
