@@ -32,6 +32,7 @@ void deviceApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
       store.dispatch(FetchedDevicesAction(deviceList));
     } else {
       // TODO: follow API guidelines for error handling
+      // TODO: implement and dispatch DevicesNotLoadedAction
       final errors = jsonDecode(response.body);
       throw(errors['errors']);
     }
