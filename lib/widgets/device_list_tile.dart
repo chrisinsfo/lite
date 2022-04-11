@@ -24,7 +24,6 @@ class _DeviceListTileState extends State<DeviceListTile> {
   
   @override
   Widget build(BuildContext context) {
-    print('build DeviceListTile');
     return Card(
         color: Colors.black12,
         child: ListTile(
