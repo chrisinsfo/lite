@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:lite/models/model.dart';
 import 'package:lite/redux/actions.dart';
 import 'package:lite/redux/selectors.dart';
@@ -7,6 +9,7 @@ AppState appStateReducer(AppState state, action) {
   switch (action.toString()) {
 
     case 'SetConfigAction':
+      developer.log('reducer: SetConfigAction');
       SetConfigAction a = action;
       final isValid = isValidConfig(a.config);
 
@@ -21,18 +24,22 @@ AppState appStateReducer(AppState state, action) {
       );
 
     case 'GetDevicesAction':
+      developer.log('reducer: GetDevicesAction');
       // middleware will intercept GetDevicesAction and trigger async call to devices api
       return AppState(ApplicationState.fetchingDevices, state.config, state.deviceList, state.lightsStateCache);
 
     case 'FetchedDevicesAction':
+      developer.log('reducer: FetchedDevicesAction');
       final FetchedDevicesAction a = action;
       return AppState(ApplicationState.fetchedDevices, state.config, a.deviceList, state.lightsStateCache);
 
     case 'GetLightsStateAction':
+      developer.log('reducer: GetLightsStateAction');
       final GetLightsStateAction a = action;
       return AppState(ApplicationState.fetchingLightsState, state.config, state.deviceList, state.lightsStateCache);
 
     case 'FetchedLightsStateAction':
+      developer.log('reducer: FetchedLightsStateAction');
       final FetchedLightsStateAction a = action;
       return AppState(ApplicationState.fetchedLightsState, state.config, state.deviceList, a.lightsStateCache);
   }

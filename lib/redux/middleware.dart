@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 import 'package:http/http.dart' as http;
 import 'package:lite/models/model.dart';
@@ -23,7 +24,7 @@ void deviceApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
     try {
       response = await http.get(uri, headers: headers);
     } catch(error) {
-      print(error);
+      developer.log('middleware', error: jsonEncode(error));
     }
 
     if (response.statusCode == 200) {
@@ -61,7 +62,7 @@ void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
     try {
       response = await http.get(uri, headers: headers);
     } catch(error) {
-      print(error);
+      developer.log('middleware', error: jsonEncode(error));
     }
 
     if (response.statusCode == 200) {
@@ -97,7 +98,7 @@ void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
     try {
       response = await http.put(uri, body: body, headers: headers);
     } catch (error) {
-      print(error);
+      developer.log(jsonEncode(error));
     }
 
     if (response.statusCode == 200) {
@@ -110,10 +111,12 @@ void lightsApiMiddleware(Store<AppState> store, dynamic action, NextDispatcher n
   }
 
   if (action is GetLightsStateAction) {
+    developer.log('middleware: GetLightsStateAction');
     getLightsState();
   }
 
   if (action is ToggleLightAction) {
+    developer.log('middleware: ToggleLightAction');
     ToggleLightAction a = action;
     toggleLight(a.lightId);
   }
