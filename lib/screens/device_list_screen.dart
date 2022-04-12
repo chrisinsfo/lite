@@ -2,32 +2,28 @@
  * Copyright © Chris Wardell, 2022.
  */
 
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:flutter/material.dart';
-import 'package:lite/blocs/device_bloc.dart';
 import 'package:lite/models/device_model.dart';
 import 'package:lite/models/model.dart';
 import 'package:lite/util/app_bar_dimension.dart';
 import 'package:lite/widgets/device_list_tile.dart';
 import 'package:lite/containers/config_container.dart';
 
-import 'package:provider/provider.dart';
-
 class DeviceListScreen extends StatelessWidget {
+  final List<DeviceModel> deviceList;
+  final Config config;
+  final Map<String, bool> lightsStateCache;
+  Function(String) onToggle;
+
+  DeviceListScreen(this.deviceList, this.config, this.lightsStateCache, this.onToggle);
+
   @override
   Widget build(BuildContext context) {
-    final devices = Provider.of<DeviceBloc>(context, listen: false);
-    final appBarDimension = context.dependOnInheritedWidgetOfExactType<AppBarDimension>()!;
+    final appBarDimension =
+        context.dependOnInheritedWidgetOfExactType<AppBarDimension>()!;
 
-    return StoreConnector<AppState, Config>(
-        converter: (Store<AppState> store) => store.state.config,
-        builder: (context, config) {
-          if (config.isValid) {
-            devices.getDeviceStream(context, config);
-          }
-          return config.isValid
-              ? Column(
+    return config.isValid
+        ? Column(
             children: [
               Row(
                 children: const [
@@ -39,50 +35,26 @@ class DeviceListScreen extends StatelessWidget {
                 ],
               ),
               Container(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height -
+                height: MediaQuery.of(context).size.height -
                     appBarDimension.height -
                     AppBarDimension.statusBarHeight -
                     60.0,
-                child: StreamBuilder(
-                  stream: devices.deviceStream,
-                  builder: (ctx, snapshot) {
-                    if (snapshot.hasError) {
-                      print('error.log: ${snapshot.error.toString()}');
-                    }
-                    if (!snapshot.hasData) {
-                      return Text("No Data",
+                child: ListView.builder(
+                  itemCount: deviceList.length,
+                  itemBuilder: (ctx, index) {
+                    if (deviceList.isEmpty) {
+                      return Text("No devices to show",
                           style: TextStyle(color: Colors.white));
+                    } else {
+                      final model = deviceList[index];
+                      return DeviceListTile(model, lightsStateCache[model.id] ?? false, onToggle);
                     }
-                    if (snapshot.hasData) {
-                      List<DeviceModel> devices =
-                      snapshot.data as List<DeviceModel>;
-                      if (devices.length == 0) {
-                        return Text("No devices to show",
-                            style: TextStyle(color: Colors.white));
-                      }
-                      List<DeviceListTile> deviceTiles =
-                      devices.map((e) => DeviceListTile(e)).toList();
-                      return ListView(
-                        scrollDirection: Axis.vertical,
-                        children: deviceTiles,
-                      );
-                    }
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
                   },
                 ),
               ),
             ],
           )
-              : Center(
+        : Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -93,13 +65,10 @@ class DeviceListScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                     child: const Text('OK'),
-                    onPressed: () =>
-                        Navigator.pushNamed(
-                            context, ConfigContainer.routeName)),
+                    onPressed: () => Navigator.pushNamed(
+                        context, ConfigContainer.routeName)),
               ],
             ),
           );
-        }
-    );
   }
 }

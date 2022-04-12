@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lite/containers/config_container.dart';
-import 'package:lite/screens/device_list_screen.dart';
+import 'package:lite/containers/devices_container.dart';
 import 'package:lite/util/app_bar_dimension.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.black87,
         body: AppBarDimension(height: appBar.preferredSize.height,
           child: SingleChildScrollView(
-            child: DeviceListScreen(),
+            child: DevicesContainer(),
           ),
         ),
       ),
