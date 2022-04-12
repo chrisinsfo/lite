@@ -14,12 +14,6 @@ class SetConfigAction extends Action {
   SetConfigAction(this.config);
 }
 
-class ValidConfigAction extends Action {
-  final Config config;
-
-  ValidConfigAction(this.config);
-}
-
 class ToggleLightAction extends Action {
   String lightId;
 
