@@ -32,3 +32,22 @@ class MockDeviceApi extends _i1.Mock implements _i2.DeviceApi {
       (super.noSuchMethod(Invocation.method(#getDevices, [store]),
           returnValue: Future<dynamic>.value()) as _i3.Future<dynamic>);
 }
+
+/// A class which mocks [LightsApi].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLightsApi extends _i1.Mock implements _i2.LightsApi {
+  MockLightsApi() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Future<dynamic> getLightsState(_i4.Store<_i5.AppState>? store) =>
+      (super.noSuchMethod(Invocation.method(#getLightsState, [store]),
+          returnValue: Future<dynamic>.value()) as _i3.Future<dynamic>);
+  @override
+  _i3.Future<dynamic> toggleLight(
+          _i4.Store<_i5.AppState>? store, String? lightId) =>
+      (super.noSuchMethod(Invocation.method(#toggleLight, [store, lightId]),
+          returnValue: Future<dynamic>.value()) as _i3.Future<dynamic>);
+}
