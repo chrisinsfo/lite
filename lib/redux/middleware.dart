@@ -5,35 +5,39 @@ import 'package:http/http.dart' as http;
 import 'package:lite/models/model.dart';
 import 'package:lite/models/device_model.dart';
 import 'package:lite/redux/actions.dart';
+import 'package:mockito/annotations.dart';
 import 'package:redux/redux.dart';
 
-void getDevices (Store<AppState> store) async {
-  developer.log('middleware: getDevices');
-  List<DeviceModel> deviceList;
-  final ip = store.state.config.ipAddress;
-  final applicationKey = store.state.config.username;
+@GenerateMocks([DeviceApi])
+class DeviceApi {
+  void getDevices (Store<AppState> store) async {
+    developer.log('middleware: getDevices');
+    List<DeviceModel> deviceList;
+    final ip = store.state.config.ipAddress;
+    final applicationKey = store.state.config.username;
 
-  final Uri uri = Uri.parse('https://$ip/clip/v2/resource/device');
+    final Uri uri = Uri.parse('https://$ip/clip/v2/resource/device');
 
-  final Map<String, String> headers = { 'hue-application-key' : applicationKey };
+    final Map<String, String> headers = { 'hue-application-key' : applicationKey };
 
-  late var response;
+    late var response;
 
-  try {
-    response = await http.get(uri, headers: headers);
-  } catch(error) {
-    developer.log('middleware', error: jsonEncode(error));
-  }
+    try {
+      response = await http.get(uri, headers: headers);
+    } catch(error) {
+      developer.log('middleware', error: jsonEncode(error));
+    }
 
-  if (response.statusCode == 200) {
-    final decoded = jsonDecode(response.body);
-    deviceList = DeviceModel.deserialize(decoded['data']);
-    store.dispatch(FetchedDevicesAction(deviceList));
-  } else {
-    // TODO: follow API guidelines for error handling
-    // TODO: implement and dispatch DevicesNotLoadedAction
-    final errors = jsonDecode(response.body);
-    throw(errors['errors']);
+    if (response.statusCode == 200) {
+      final decoded = jsonDecode(response.body);
+      deviceList = DeviceModel.deserialize(decoded['data']);
+      store.dispatch(FetchedDevicesAction(deviceList));
+    } else {
+      // TODO: follow API guidelines for error handling
+      // TODO: implement and dispatch DevicesNotLoadedAction
+      final errors = jsonDecode(response.body);
+      throw(errors['errors']);
+    }
   }
 }
 

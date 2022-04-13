@@ -30,7 +30,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     if (store.state.applicationState == ApplicationState.validConfig) {
-      store.dispatch(getDevices);
+      store.dispatch(DeviceApi().getDevices);
     }
 
     if (store.state.applicationState == ApplicationState.fetchedDevices) {
