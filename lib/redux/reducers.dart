@@ -42,6 +42,11 @@ AppState appStateReducer(AppState state, action) {
       developer.log('reducer: FetchedLightsStateAction');
       final FetchedLightsStateAction a = action;
       return AppState(ApplicationState.fetchedLightsState, state.config, state.deviceList, a.lightsStateCache);
+
+    case 'UpdatedLightStateAction':
+      developer.log('reducer: UpdatedLightStateAction');
+      final UpdatedLightStateAction a = action;
+      return AppState(ApplicationState.userInteractive, state.config, state.deviceList, a.lightsStateCache);
   }
 
   return state;
