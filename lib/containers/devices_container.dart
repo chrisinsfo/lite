@@ -34,13 +34,13 @@ class _ViewModel {
     }
 
     if (store.state.applicationState == ApplicationState.fetchedDevices) {
-      store.dispatch(getLightsState);
+      store.dispatch(LightsApi().getLightsState);
     }
 
     return _ViewModel(
         store.state.deviceList,
         store.state.config,
         store.state.lightsStateCache,
-        (lightId) => store.dispatch(toggleLight(store, lightId)));
+        (lightId) => store.dispatch(LightsApi().toggleLight(store, lightId)));
   }
 }
