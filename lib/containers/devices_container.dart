@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lite/models/model.dart';
-import 'package:lite/redux/actions.dart';
 import 'package:lite/redux/middleware.dart';
 import 'package:lite/models/device_model.dart';
 import 'package:lite/screens/device_list_screen.dart';

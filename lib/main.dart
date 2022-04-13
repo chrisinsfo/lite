@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lite/redux/middleware.dart';
 import 'package:lite/containers/config_container.dart';
 import 'package:lite/models/model.dart';
 import 'package:lite/redux/reducers.dart';
