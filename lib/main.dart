@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     final Store<AppState> store = Store<AppState>(
       appStateReducer,
       initialState: AppState.initialState(),
-      middleware: [thunkMiddleware, lightsApiMiddleware]
+      middleware: [thunkMiddleware, ExtraArgumentThunkMiddleware(String)]
     );
 
     return StoreProvider<AppState>(

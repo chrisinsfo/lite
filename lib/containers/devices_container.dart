@@ -42,6 +42,6 @@ class _ViewModel {
         store.state.deviceList,
         store.state.config,
         store.state.lightsStateCache,
-        (lightId) => store.dispatch(ToggleLightAction(lightId)));
+        (lightId) => store.dispatch(toggleLight(store, lightId)));
   }
 }
