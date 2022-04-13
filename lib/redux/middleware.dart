@@ -10,7 +10,7 @@ import 'package:redux/redux.dart';
 
 @GenerateMocks([DeviceApi])
 class DeviceApi {
-  void getDevices (Store<AppState> store) async {
+  Future getDevices (Store<AppState> store) async {
     developer.log('middleware: getDevices');
     List<DeviceModel> deviceList;
     final ip = store.state.config.ipAddress;

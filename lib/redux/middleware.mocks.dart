@@ -2,10 +2,12 @@
 // in lite/redux/middleware.dart.
 // Do not manually edit this file.
 
-import 'package:lite/models/model.dart' as _i4;
+import 'dart:async' as _i3;
+
+import 'package:lite/models/model.dart' as _i5;
 import 'package:lite/redux/middleware.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:redux/redux.dart' as _i3;
+import 'package:redux/redux.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -26,7 +28,7 @@ class MockDeviceApi extends _i1.Mock implements _i2.DeviceApi {
   }
 
   @override
-  void getDevices(_i3.Store<_i4.AppState>? store) =>
-      super.noSuchMethod(Invocation.method(#getDevices, [store]),
-          returnValueForMissingStub: null);
+  _i3.Future<dynamic> getDevices(_i4.Store<_i5.AppState>? store) =>
+      (super.noSuchMethod(Invocation.method(#getDevices, [store]),
+          returnValue: Future<dynamic>.value()) as _i3.Future<dynamic>);
 }
